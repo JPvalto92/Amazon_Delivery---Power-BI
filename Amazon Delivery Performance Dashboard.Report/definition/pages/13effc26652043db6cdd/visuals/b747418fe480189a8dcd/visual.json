@@ -1,0 +1,163 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "b747418fe480189a8dcd",
+  "position": {
+    "x": 9.5641344956413459,
+    "y": 296.48816936488168,
+    "z": 2000,
+    "height": 293.30012453300128,
+    "width": 698.18181818181824,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datos de Entrega Amazon"
+                    }
+                  },
+                  "Property": "Latitud_Cliente"
+                }
+              },
+              "queryRef": "Amazon Delivery Dataset.Drop_Latitude",
+              "nativeQueryRef": "Latitud_Cliente",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datos de Entrega Amazon"
+                    }
+                  },
+                  "Property": "Longitud_Cliente"
+                }
+              },
+              "queryRef": "Amazon Delivery Dataset.Drop_Longitude",
+              "nativeQueryRef": "Longitud_Cliente",
+              "active": false
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Datos de Entrega Amazon"
+                        }
+                      },
+                      "Property": "Tiempo_Entrega"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Amazon Delivery Dataset.Delivery_Time)",
+              "nativeQueryRef": "Tiempo_Entrega",
+              "displayName": "Tiempo_Entrega"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#808080'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 5,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

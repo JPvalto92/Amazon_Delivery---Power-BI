@@ -1,0 +1,15 @@
+relationship 16cf0349-6caa-4c4d-961c-70fadbc22911
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Datos de Entrega Amazon'.Fecha_Pedido
+	toColumn: LocalDateTable_39d2d315-877c-412b-a1f6-0f39702e9534.Date
+
+relationship 47327db2-5e43-489a-8c68-bdc7d09a6a26
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Datos de Entrega Amazon'.Hora_Recogida
+	toColumn: LocalDateTable_f03a7c1c-ed31-4ae0-86f7-67f1177b04c4.Date
+
+relationship 3711b1f0-f3e5-47ac-a638-2fdf797f52e6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Datos de Entrega Amazon'.Hora_Pedido
+	toColumn: LocalDateTable_6edde106-21df-4fd2-a2d4-7b24f5cbf94c.Date
+

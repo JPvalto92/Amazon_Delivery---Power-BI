@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Amazon Delivery Performance Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ab983e70-37eb-4bea-8fa7-7d44011ccac1"
+  }
+}

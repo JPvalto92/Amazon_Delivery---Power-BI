@@ -1,0 +1,32 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Errores en las consultas cargadas en 2/25/2026 10:11:18 PM.
+queryGroup 'Errores en las consultas: 2/25/2026 10:11:18 PM'
+
+	annotation PBI_QueryGroupOrder = 0
+
+/// Errores en las consultas cargadas en 2/25/2026 11:37:13 PM.
+queryGroup 'Errores en las consultas: 2/25/2026 11:37:13 PM'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Datos de Entrega Amazon","Errores en Amazon Delivery Dataset","Errores en Amazon Delivery Dataset (2)"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Datos de Entrega Amazon'
+ref table DateTableTemplate_cbbf293e-9eaa-4e2f-931c-1f903ff0d576
+ref table LocalDateTable_39d2d315-877c-412b-a1f6-0f39702e9534
+ref table LocalDateTable_f03a7c1c-ed31-4ae0-86f7-67f1177b04c4
+ref table LocalDateTable_6edde106-21df-4fd2-a2d4-7b24f5cbf94c
+
+ref cultureInfo es-ES
+

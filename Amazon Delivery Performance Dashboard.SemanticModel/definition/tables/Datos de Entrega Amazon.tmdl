@@ -1,0 +1,387 @@
+table 'Datos de Entrega Amazon'
+	lineageTag: a112a69b-b86c-4fa3-b3bd-35078dbf7cb2
+
+	measure 'Pedidos Totales' = COUNT('Datos de Entrega Amazon'[ID_Pedido])
+		formatString: 0
+		lineageTag: 0305690d-b9e3-4cc5-9b34-21e65ce23d5f
+
+		changedProperty = IsHidden
+
+	measure 'Prom. Tiempo Entrega' =
+			
+			AVERAGEX(
+			    FILTER(
+			        'Datos de Entrega Amazon',
+			        'Datos de Entrega Amazon'[Tiempo_Entrega] > 0
+			    ),
+			    'Datos de Entrega Amazon'[Tiempo_Entrega]
+			)
+		lineageTag: bd6ee2d3-1226-409d-817d-f5430c4c52a0
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Prom. Calificación Agente' =
+			
+			AVERAGE('Datos de Entrega Amazon'[Calificación_Agente])
+		lineageTag: d5beac2b-7070-4846-89e6-017ec302fdf5
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Entrega tardía %' =
+			
+			DIVIDE(
+			    COUNTROWS(
+			        FILTER(
+			            'Datos de Entrega Amazon',
+			            'Datos de Entrega Amazon'[Entrega de Tardía] = "Late"
+			        )
+			    ),
+			    COUNTROWS('Datos de Entrega Amazon')
+			)
+		lineageTag: 32e4dacf-805f-4c3e-8286-ce97dbc43de6
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Costo Total Estimado' =
+			
+			SUM('Datos de Entrega Amazon'[Tiempo_Entrega]) * 0.5
+		lineageTag: 8974c267-c11f-4a2d-8b9a-41fbb673a245
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Prom. Costo Estimado' =
+			
+			AVERAGE('Datos de Entrega Amazon'[Tiempo_Entrega]) * 0.5
+		lineageTag: 5eb81924-987b-4021-afe8-0f1d33f9751b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Costo según el clima' =
+			
+			[Costo Total Estimado]
+		lineageTag: 0fdbb2b0-85c0-4bdf-b393-c3c0eab5962d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ingresos Totales' =
+			
+			COUNTROWS('Datos de Entrega Amazon') * 8
+		formatString: 0
+		lineageTag: 4b9cf6b9-0c75-447d-b8dd-69ac43aa2b6c
+
+		changedProperty = IsHidden
+
+	measure 'Venficio Total' =
+			
+			[Ingresos Totales] - [Costo Total Estimado]
+		lineageTag: 4035fb03-5685-44a4-b25c-83d0ce6c1ad1
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen Veneficio %' =
+			
+			DIVIDE([Venficio Total], [Ingresos Totales])
+		lineageTag: 6e091add-af00-44e3-a20d-feed65e3c715
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ID_Pedido
+		dataType: string
+		lineageTag: 698c9290-409b-4fed-b31e-f00c0d33dfb4
+		summarizeBy: none
+		sourceColumn: ID_Pedido
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Edad_Agente
+		dataType: int64
+		formatString: 0
+		lineageTag: 3cf763e9-d270-4b32-b2f0-09178ecc9ecc
+		summarizeBy: sum
+		sourceColumn: Edad_Agente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Calificación_Agente
+		dataType: double
+		lineageTag: dd8630da-644f-47b6-bd44-bf6a50eee4d3
+		summarizeBy: sum
+		sourceColumn: Calificación_Agente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Latitud_Tienda
+		dataType: double
+		lineageTag: eedfb68b-85ae-4bd3-b9c3-309640f80c64
+		summarizeBy: sum
+		sourceColumn: Latitud_Tienda
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitud_Tienda
+		dataType: double
+		lineageTag: 98edc57f-73eb-4fe5-ac1d-6ead3b038b84
+		summarizeBy: sum
+		sourceColumn: Longitud_Tienda
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Latitud_Cliente
+		dataType: double
+		lineageTag: c673c600-9fee-406f-8de6-c7123629e69a
+		summarizeBy: sum
+		sourceColumn: Latitud_Cliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitud_Cliente
+		dataType: double
+		lineageTag: 532a7efa-f7fd-4da9-b258-cce17e8af61b
+		summarizeBy: sum
+		sourceColumn: Longitud_Cliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Fecha_Pedido
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b98f950f-babc-4189-8517-419e3d248db4
+		summarizeBy: none
+		sourceColumn: Fecha_Pedido
+
+		variation Variación
+			isDefault
+			relationship: 16cf0349-6caa-4c4d-961c-70fadbc22911
+			defaultHierarchy: LocalDateTable_39d2d315-877c-412b-a1f6-0f39702e9534.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Hora_Pedido
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 021b3955-c1b6-4912-be7b-67eda8111db4
+		summarizeBy: none
+		sourceColumn: Hora_Pedido
+
+		variation Variación
+			isDefault
+			relationship: 3711b1f0-f3e5-47ac-a638-2fdf797f52e6
+			defaultHierarchy: LocalDateTable_6edde106-21df-4fd2-a2d4-7b24f5cbf94c.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hora_Recogida
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 4b53a2f9-ba10-41cb-9c8c-542f82e036ad
+		summarizeBy: none
+		sourceColumn: Hora_Recogida
+
+		variation Variación
+			isDefault
+			relationship: 47327db2-5e43-489a-8c68-bdc7d09a6a26
+			defaultHierarchy: LocalDateTable_f03a7c1c-ed31-4ae0-86f7-67f1177b04c4.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clima
+		dataType: string
+		lineageTag: d4bca0ac-494d-4a29-887e-079eae08b64b
+		summarizeBy: none
+		sourceColumn: Clima
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tráfico
+		dataType: string
+		lineageTag: 536dce2e-721d-4174-b988-ea304155f446
+		summarizeBy: none
+		sourceColumn: Tráfico
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column vehículo
+		dataType: string
+		lineageTag: ab96792f-18c7-4905-8b4b-14b2a3287877
+		summarizeBy: none
+		sourceColumn: vehículo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Área
+		dataType: string
+		lineageTag: 7e56f789-68c5-4bda-a94f-d74a04e17770
+		summarizeBy: none
+		sourceColumn: Área
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tiempo_Entrega
+		dataType: int64
+		formatString: 0
+		lineageTag: d8b643ed-4fd2-4091-b0df-13c2ff808b78
+		summarizeBy: sum
+		sourceColumn: Tiempo_Entrega
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoría
+		dataType: string
+		lineageTag: 49f9e584-d4ce-4123-bd93-24e1f046b953
+		summarizeBy: none
+		sourceColumn: Categoría
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Entrega de Tardía' =
+			
+			IF ( [Tiempo_Entrega] > 40, "Late", "On Time" )
+		lineageTag: 0bc82fa3-f7c7-4fef-84fb-f25e59687708
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tiempo_Preparación(min) =
+			
+			VAR Diff =
+			    DATEDIFF(
+			        'Datos de Entrega Amazon'[Hora_Pedido],
+			        'Datos de Entrega Amazon'[Hora_Recogida],
+			        MINUTE
+			    )
+			RETURN
+			IF(Diff < 0, Diff + 1440, Diff)
+		formatString: 0
+		lineageTag: 310d4207-dc18-4af7-b74a-28f97311d5eb
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Hora del Pedido' =
+			
+			HOUR('Datos de Entrega Amazon'[Hora_Pedido])
+		formatString: 0
+		lineageTag: efe4d210-0e08-48c3-8930-0f35d44ee003
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segmento_Tiempo =
+			
+			IF(
+			    'Datos de Entrega Amazon'[Hora del Pedido] >= 18 &&
+			    'Datos de Entrega Amazon'[Hora del Pedido] <= 22,
+			    "Peak",
+			    "Off-Peak"
+			)
+		lineageTag: 8b078275-e1f3-4dc9-a2bb-df4dad532807
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Datos de Entrega Amazon' = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\Users\jpval\Desktop\Power BI\amazon_delivery.csv\amazon_delivery.csv"),[Delimiter=",", Columns=16, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"Order_ID", type text}, {"Agent_Age", Int64.Type}, {"Agent_Rating", type number}, {"Store_Latitude", type number}, {"Store_Longitude", type number}, {"Drop_Latitude", type number}, {"Drop_Longitude", type number}, {"Order_Date", type date}, {"Order_Time", type time}, {"Pickup_Time", type time}, {"Weather", type text}, {"Traffic", type text}, {"Vehicle", type text}, {"Area", type text}, {"Delivery_Time", Int64.Type}, {"Category", type text}}),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Tipo cambiado",0,null,Replacer.ReplaceValue,{"Delivery_Time"}),
+				    #"Valor reemplazado1" = Table.ReplaceValue(#"Valor reemplazado",0,null,Replacer.ReplaceValue,{"Store_Latitude", "Store_Longitude", "Drop_Latitude", "Drop_Longitude"}),
+				    #"Errores reemplazados" = Table.ReplaceErrorValues(#"Valor reemplazado1", {{"Drop_Latitude", null}}),
+				    #"Errores reemplazados1" = Table.ReplaceErrorValues(#"Errores reemplazados", {{"Drop_Latitude", null}}),
+				    #"Errores reemplazados2" = Table.ReplaceErrorValues(#"Errores reemplazados1", {{"Drop_Longitude", null}}),
+				    #"Errores reemplazados4" = Table.ReplaceErrorValues(#"Errores reemplazados2", {{"Drop_Longitude", null}}),
+				    #"Valor reemplazado3" = Table.ReplaceValue(#"Errores reemplazados4",0.08,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado2" = Table.ReplaceValue(#"Valor reemplazado3",0.11,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado4" = Table.ReplaceValue(#"Valor reemplazado2",0.03,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado5" = Table.ReplaceValue(#"Valor reemplazado4",0.06,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado6" = Table.ReplaceValue(#"Valor reemplazado5",0.02,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado7" = Table.ReplaceValue(#"Valor reemplazado6",0.04,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado8" = Table.ReplaceValue(#"Valor reemplazado7",0.01,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado9" = Table.ReplaceValue(#"Valor reemplazado8",0.07,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado10" = Table.ReplaceValue(#"Valor reemplazado9",0.13,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado11" = Table.ReplaceValue(#"Valor reemplazado10",0.05,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Valor reemplazado12" = Table.ReplaceValue(#"Valor reemplazado11",0.09,null,Replacer.ReplaceValue,{"Drop_Latitude", "Drop_Longitude"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Valor reemplazado12",{{"Agent_Age", "Edad_Agente"}, {"Order_ID", "ID_Pedido"}, {"Agent_Rating", "Calificación_Agente"}, {"Store_Latitude", "Latitud_Tienda"}, {"Store_Longitude", "Longitud_Tienda"}, {"Drop_Latitude", "Latitud_Cliente"}, {"Drop_Longitude", "Longitud_Cliente"}, {"Order_Date", "Fecha_Pedido"}, {"Order_Time", "Hora_Pedido"}, {"Pickup_Time", "Hora_Recogida"}, {"Weather", "Clima"}, {"Traffic", "Tráfico"}, {"Vehicle", "vehículo"}, {"Area", "Área"}, {"Delivery_Time", "Tiempo_Entrega"}, {"Category", "Categoría"}})
+				in
+				    #"Columnas con nombre cambiado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+
